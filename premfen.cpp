@@ -81,7 +81,26 @@ void premFen::afficherResultat()
         resultat = "#define " + this->nom->text() + "_H";
         fen2->ajouterTexte(resultat);
     }
-
+    if (this->boxCommentaires->isChecked())
+    {
+        fen2->ajouterTexte("/*"),
+        fen2->ajouterTexte(this->date->text());
+        resultat = "Auteur: ";
+        if (this->auteur->text().isEmpty())
+        {
+            resultat += "Anonyme";
+        }
+        else {
+            resultat += this->auteur->text();
+        }
+        fen2->ajouterTexte(resultat);
+        if (!this->texte->toPlainText().isEmpty())
+        {
+            fen2->ajouterTexte(QString("Description:"));
+            fen2->ajouterTexte(this->texte->toPlainText());
+        }
+        fen2->ajouterTexte("*/");
+    }
     if (this->parent->text().isEmpty())
     {
     resultat = "class " + this->nom->text();
